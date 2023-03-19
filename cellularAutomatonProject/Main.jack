@@ -1,0 +1,112 @@
+class Main{
+    function void main() {
+        //do Main.test2(250);
+        var int max, i;
+        let i = 0;
+        let max = 20000;
+        while (i < max){
+            do Screen.clearScreen();
+            do Output.moveCursor(0, 0);
+            do Output.printInt(i);
+            do Main.test2(3);
+            let i = i + 1;
+        }
+        
+        return;
+    }
+    
+    function void test1(){
+        var Array state, rule;
+        var int i, j, m;
+        var CellsAuto cells;
+        let m = 60;
+        let state = Array.new(m);
+        let rule = Array.new(8);
+        //rule 30
+        let rule[0] = false;
+        let rule[1] = false;
+        let rule[2] = false;
+        let rule[3] = true;
+        let rule[4] = true;
+        let rule[5] = true;
+        let rule[6] = true;
+        let rule[7] = false;
+        let i = 0;
+        while (i < m){
+            let state[i] = false;
+            let i = i + 1;
+        }
+        let state[m/2] = true;
+        
+        let cells = CellsAuto.new(state, m, rule);
+        let i = 0;
+        let j = 0;
+        while(i < 20){
+            let state = cells.getCurrentState();
+            let j = 0;
+            while (j < m){
+                if (state[j]){
+                    do Output.printChar(23);
+                }
+                else{
+                    do Output.printChar(46);
+                }
+                let j = j + 1;
+            }
+            do Output.println();
+            do cells.buildFutureState();
+            let i = i + 1;
+        }
+        do rule.dispose();
+        do state.dispose();
+        do cells.dispose();
+        return;
+    }
+
+    //better visualization
+    function void test2(int h){
+        var Array state, rule;
+        var int i, j, m, h;
+        var CellsAuto cells;
+        let m = 500;
+        let state = Array.new(m);
+        let rule = Array.new(8);
+        //rule 30
+        let rule[0] = false;
+        let rule[1] = false;
+        let rule[2] = false;
+        let rule[3] = true;
+        let rule[4] = true;
+        let rule[5] = true;
+        let rule[6] = true;
+        let rule[7] = false;
+        let i = 0;
+        while (i < m){
+            let state[i] = false;
+            let i = i + 1;
+        }
+        let state[m/2] = true;
+        
+        let cells = CellsAuto.new(state, m, rule);
+        let i = 0;
+        let j = 0;
+        do Screen.setColor(true);
+        while(i < h){
+            let state = cells.getCurrentState();
+            let j = 0;
+            while (j < m){
+                if (state[j]){
+                    do Screen.drawPixel(j, i);
+                }
+                let j = j + 1;
+            }
+            do Output.println();
+            do cells.buildFutureState();
+            let i = i + 1;
+        }
+        do rule.dispose();
+        do state.dispose();
+        do cells.dispose();
+        return;
+    }
+}
